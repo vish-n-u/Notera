@@ -16,8 +16,8 @@ android {
         applicationId = "com.myapp.ridescribe"
         minSdk = 29
         targetSdk = 35
-        versionCode = 98
-        versionName = "1.9.8"
+        versionCode = 100
+        versionName = "1.9.9.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -72,14 +72,13 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
     implementation("io.coil-kt.coil3:coil-compose:3.2.0")
     implementation("androidx.webkit:webkit:1.8.0")
-
+    implementation("com.moizhassan.ffmpeg:ffmpeg-kit-16kb:6.1.1")
     // ✅ Aztec Glide loader (provides GlideImageLoader & GlideVideoThumbnailLoader)
     // ✅ Glide image library (required for GlideImageLoader)
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.36.0")
-    implementation("com.arthenica:ffmpeg-kit-full:6.0-2.LTS")
     implementation("com.google.accompanist:accompanist-drawablepainter:0.35.0-alpha")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.9.0")
-
+    implementation("com.arthenica:smart-exception-java:0.2.1")
     implementation("androidx.activity:activity-compose:1.10.1")
     implementation("com.google.code.gson:gson:2.11.0")
     implementation("com.google.firebase:firebase-auth")

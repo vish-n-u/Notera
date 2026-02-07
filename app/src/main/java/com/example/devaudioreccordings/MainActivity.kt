@@ -96,8 +96,6 @@ class MainActivity : ComponentActivity() {
     var showDialogBoxOf by mutableStateOf<dialogBoxPermissionCategory?>(null)
     var showErrorDialogBox = mutableStateOf(false)
     var showErrorMessage = mutableStateOf("")
-    var showSplashScreen = mutableStateOf(true)
-
 
     val addMediaViewModel = AddMediaViewModel()
 
@@ -529,7 +527,28 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                         .background(MaterialTheme.colorScheme.primary),
                 ) {
-                    if (!showSplashScreen.value) {
+                    if (appViewModel.showSplashPreview.value) {
+                        // Settings-triggered onboarding preview
+                        OnboardingScreen(
+                            onOnboardingComplete = {
+                                appViewModel.showSplashPreview.value = false
+                            },
+                            viewModel = appViewModel
+                        )
+                    } else if (!appViewModel.isReady.value) {
+                        // Wait for DataStore to load before deciding
+                    } else if (appViewModel.isFirstLaunch.value) {
+                        // First launch - show onboarding
+                        OnboardingScreen(
+                            onOnboardingComplete = {
+                                CoroutineScope(Dispatchers.IO).launch {
+                                    appViewModel.firstLaunch()
+                                }
+                            },
+                            viewModel = appViewModel
+                        )
+                    } else {
+                        // Normal app flow
                         val context = LocalContext.current
                         PermissionDialogBoxContent[showDialogBoxOf]?.let {
                             DialogBoxForPermissionDenial(
@@ -556,14 +575,6 @@ class MainActivity : ComponentActivity() {
                             addMediaViewModel,
                             addMediaViewModel.isTextGettingGenerated.value
                         )
-                    } else {
-                        SplashScreen(viewModel = appViewModel, onSplashScreenComplete = {
-                            showSplashScreen.value = false
-                            CoroutineScope(Dispatchers.IO).launch {
-                                appViewModel.firstLaunch()
-                            }
-
-                        })
                     }
                 }
             }

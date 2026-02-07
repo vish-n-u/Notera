@@ -57,12 +57,13 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     var useAppTheme = mutableStateOf(true)
     var appTheme = mutableStateOf(AppTheme.SYSTEM.toString())
     var appColorTheme = mutableStateOf(AppColorTheme.GREEN.toString())
-
+    var showSplashPreview = mutableStateOf(false)
 
     val context = application
     lateinit var dataStoreDataFlow: Flow<Preferences>
 
     val isFirstLaunch = mutableStateOf(true)
+    val isReady = mutableStateOf(false)
 
     init {
 
@@ -78,13 +79,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                 appTheme.value = it[DataStoreKeys.App_Theme] ?: AppTheme.SYSTEM.toString()
                 appColorTheme.value =
                     it[DataStoreKeys.Color_Scheme] ?: AppColorTheme.GREEN.toString()
-//                isFirstLaunch.value = true
                 if (it[DataStoreKeys.Use_App_Theme] == false) {
                     useAppTheme.value = false
-
                 }
-
-
+                isReady.value = true
             }
 
 
@@ -141,6 +139,9 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
 
                 if (isFirstLaunch) {
+                    // Preserve theme/color already set during onboarding
+                    val savedTheme = prefs[DataStoreKeys.App_Theme] ?: AppTheme.SYSTEM.toString()
+                    val savedColor = prefs[DataStoreKeys.Color_Scheme] ?: AppColorTheme.GREEN.toString()
 
                     context.user.edit {
                         it[DataStoreKeys.first_launch] = false
@@ -152,8 +153,8 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                         it[DataStoreKeys.Used_Enhance_Text_Count] = 0
                         it[DataStoreKeys.Total_Enhance_Text_Count] = 10
                         it[DataStoreKeys.Use_App_Theme] = true
-                        it[DataStoreKeys.App_Theme] = AppTheme.LIGHT.toString()
-                        it[DataStoreKeys.Color_Scheme] = AppColorTheme.GREEN.toString()
+                        it[DataStoreKeys.App_Theme] = savedTheme
+                        it[DataStoreKeys.Color_Scheme] = savedColor
                     }
                     RetrofitInstance.ApiServices.createUser(token, IdRequest(user))
 

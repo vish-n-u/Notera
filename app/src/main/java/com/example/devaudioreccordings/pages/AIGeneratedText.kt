@@ -144,7 +144,14 @@ fun AITextGenerated(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("AI Generated Text") },
+                title = {
+                    Text(
+                        "AI Generated Text",
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = {
                         if (uiState == UIState.Generating) {

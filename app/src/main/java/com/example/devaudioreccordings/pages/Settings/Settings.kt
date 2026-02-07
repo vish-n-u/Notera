@@ -65,7 +65,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MediumTopAppBar
+import androidx.compose.material.icons.outlined.PlayArrow
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -207,11 +209,13 @@ fun SettingsScreen(
 
     Scaffold(
         topBar = {
-            MediumTopAppBar(
+            TopAppBar(
                 title = {
                     Text(
                         "Settings",
-                        style = MaterialTheme.typography.headlineMedium
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            fontWeight = FontWeight.SemiBold
+                        )
                     )
                 },
                 navigationIcon = {
@@ -304,6 +308,15 @@ fun SettingsScreen(
                                 shape = CircleShape
                             )
                     )
+                }
+            )
+
+            SettingsItem(
+                icon = Icons.Outlined.PlayArrow,
+                title = "Onboarding",
+                subtitle = "View the onboarding screens again",
+                onClick = {
+                    appViewModel.showSplashPreview.value = true
                 }
             )
 
