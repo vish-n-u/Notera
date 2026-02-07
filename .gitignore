@@ -13,3 +13,37 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+
+# Android Studio files
+.idea/
+*.iml
+/.idea/caches/
+/.idea/libraries/
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+
+# Keystore files (security)
+*.jks
+*.keystore
+
+# Generated files
+captures/
+output.json
+
+# Misc
+.DS_Store
+Thumbs.db
+
+# Jetpack Compose Preview cache
+.idea/deploymentTargetDropDown.xml
+.idea/deploymentTargetSelector.xml
+
+# NDK
+.externalNativeBuild/
+
+# APKs
+*.apk
+*.aab
