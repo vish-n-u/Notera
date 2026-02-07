@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Outer glow effect layer -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="24dp" />
+            <stroke
+                android:width="2dp"
+                android:color="#FFDD40" />
+            <gradient
+                android:type="radial"
+                android:gradientRadius="35dp"
+                android:startColor="#FFDD40"
+                android:endColor="#00000000" />
+        </shape>
+    </item>
+
+    <!-- Main background layer with transparent center -->
+    <item android:left="4dp" android:top="4dp" android:right="4dp" android:bottom="4dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="20dp" />
+            <solid android:color="#CC202025" /> <!-- Semi-transparent dark background -->
+        </shape>
+    </item>
+</layer-list>

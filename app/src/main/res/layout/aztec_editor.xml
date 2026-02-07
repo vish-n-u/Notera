@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.devaudioreccordings.AztecView"
+    android:fitsSystemWindows="true">
+
+    <!-- ScrollView that scrolls all content together -->
+    <ScrollView
+        android:id="@+id/scrollViewEditText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Some static content above, optional -->
+
+
+            <!-- The Aztec Editor inside ScrollView -->
+            <org.wordpress.aztec.AztecText
+                android:id="@+id/aztec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="500dp"
+                android:background="@android:color/white"
+                android:hint="Start writing..."
+                android:padding="16dp"
+                android:gravity="top|start"
+                android:scrollbars="vertical"
+                android:inputType="textMultiLine|textCapSentences"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/black"/>
+            <org.wordpress.aztec.source.SourceViewEditText
+                android:id="@+id/source"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/darker_gray"
+                android:padding="16dp"
+                android:textColor="@android:color/white"
+                android:visibility="gone" />
+
+
+
+
+
+            <!-- Optional: more static content below -->
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Floating Action Button - positioned above toolbar -->
+    <ImageButton
+        android:id="@+id/fab_save"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="72dp"
+        android:background="@drawable/rounded_square_button"
+        android:src="@drawable/ic_save"
+        app:tint="@android:color/white"
+        android:contentDescription="Save"/>
+
+    <!-- Toolbar pinned at the bottom -->
+    <org.wordpress.aztec.toolbar.AztecToolbar
+        android:id="@+id/formatting_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

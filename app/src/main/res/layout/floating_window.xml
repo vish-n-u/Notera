@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_background"
+    android:orientation="vertical">
+
+    <!-- Main Control Bar -->
+    <LinearLayout
+        android:id="@+id/movable_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <!-- Recording Start/Stop Button -->
+        <ImageButton
+            android:id="@+id/start_recording"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Start/Stop Recording"
+            android:elevation="2dp"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/start_recording" />
+
+        <ImageButton
+            android:id="@+id/capture_ss"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Take Screenshot"
+            android:elevation="2dp"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:src="@drawable/camera_shutter" />
+
+        <!-- Play/Pause Button -->
+        <ImageButton
+            android:id="@+id/playpause_recording"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/circle_ripple"
+            android:contentDescription="Play/Pause Recording"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/pause"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="24dp"
+            android:layout_marginHorizontal="8dp"
+            android:background="#20000000" />
+
+        <!-- Back to App Button -->
+        <ImageButton
+            android:id="@+id/back_to_app"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Back to App"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/files" />
+
+        <!-- Close App Button -->
+        <ImageButton
+            android:id="@+id/stop_app"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Close App"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/cross" />
+    </LinearLayout>
+
+    <!-- Recording Mode Selector - Always Visible Before Recording -->
+
+    <!-- Timer and Recording Indicator -->
+    <LinearLayout
+        android:id="@+id/timer_recording_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@color/timer_recording_indicator_background_color_Transcription"
+        android:gravity="center"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="12dp">
+
+        <ImageButton
+            android:id="@+id/recording_indicator"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Recording Indicator"
+            android:padding="2dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/recording_indicator" />
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:text="@string/_0_00"
+            android:textColor="@color/timer_recording_indicator_text_color_Transcription"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Mode Badge - Shows current mode during recording -->
+        <TextView
+            android:id="@+id/recording_mode_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:text="Transcript"
+            android:textSize="11sp"
+            android:textColor="@color/timer_recording_indicator_text_color_Transcription"
+            android:background="@drawable/mode_badge_background"
+            android:fontFamily="sans-serif-medium" />
+    </LinearLayout>
+
+    <!-- Header Layout -->
+    <LinearLayout
+        android:id="@+id/timerAndHeaderLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="8dp"
+
+        android:visibility="gone">
+        <!--Transcript or Summary-->
+
+
+        <LinearLayout
+            android:id="@+id/recording_mode_selector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/edit_text_background"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blackGray"
+                android:text="Save Content As"
+                android:paddingBottom="8dp"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-medium"/>
+
+            <RadioGroup
+                android:id="@+id/recording_mode_radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_transcript"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Transcript"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:checked="true"
+                    android:paddingVertical="8dp"/>
+
+                <RadioButton
+                    android:id="@+id/radio_summary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="Summary"
+                    android:textSize="14sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingVertical="8dp"/>
+
+            </RadioGroup>
+        </LinearLayout>
+
+
+        <!-- Title Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/header_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="4dp"
+                android:paddingBottom="4dp"
+                android:text="0/30"
+                android:textAlignment="textEnd"
+                android:textColor="#757575"
+                android:textSize="11sp" />
+
+            <EditText
+                android:id="@+id/header_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_background"
+                android:hint="Add a note title..."
+                android:padding="12dp"
+                android:textSize="14sp"
+                android:textColorHint="#9E9E9E" />
+        </LinearLayout>
+
+        <!-- Subtitle Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/sub_header_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="4dp"
+                android:paddingBottom="4dp"
+                android:text="0/50"
+                android:textAlignment="textEnd"
+                android:textColor="#757575"
+                android:textSize="11sp" />
+
+            <EditText
+                android:id="@+id/sub_header_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_background"
+                android:hint="Add a sub-title..."
+                android:padding="12dp"
+                android:textSize="14sp"
+                android:textColorHint="#9E9E9E" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Collapse/Expand Button -->
+    <LinearLayout
+        android:id="@+id/bottom_hide_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/timer_header_visibility"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:layout_marginBottom="2dp"
+            android:contentDescription="Toggle fields visibility"
+            android:src="@drawable/up_arrow" />
+    </LinearLayout>
+
+</LinearLayout>
