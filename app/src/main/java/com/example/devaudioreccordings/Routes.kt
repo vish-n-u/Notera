@@ -21,6 +21,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.devaudioreccordings.pages.AICall.AICallScreen
 import com.example.devaudioreccordings.pages.AITextGenerated
 import com.example.devaudioreccordings.pages.EditPage.EditPage
 import com.example.devaudioreccordings.pages.Homepage.Homepage
@@ -31,9 +32,13 @@ import com.example.devaudioreccordings.viewModals.AddMediaViewModel
 import com.example.devaudioreccordings.viewModals.AppViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import java.net.URLDecoder
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 enum class Routes {
-    Homepage, ListRecordings, EditPage, AddMediaPage, AIGeneratedText, Settings, PrivacyPolicy, FloatingUI
+    Homepage, ListRecordings, EditPage, AddMediaPage, AIGeneratedText, Settings, PrivacyPolicy, FloatingUI, AICall
 }
 
 enum class Flows {
@@ -160,6 +165,26 @@ fun Navigation(
                 route = Routes.Settings.name
             ) {
                 SettingsScreen(appViewModel, navigationController)
+            }
+
+            composable(route = Routes.AICall.name) {
+                val scope = rememberCoroutineScope()
+                AICallScreen(
+                    navController = navigationController,
+                    onSaveTranscript = { transcript ->
+                        scope.launch(Dispatchers.IO) {
+                            val id = appViewModel.addInitialTextData(
+                                header = "AI Conversation",
+                                text = transcript
+                            )
+                            withContext(Dispatchers.Main) {
+                                navigationController.navigate(
+                                    Routes.EditPage.name + "?id=$id&flow=${Flows.AddText.name}"
+                                )
+                            }
+                        }
+                    }
+                )
             }
         }
     }

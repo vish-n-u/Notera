@@ -37,6 +37,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.ContentPaste
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.GraphicEq
@@ -85,6 +86,7 @@ import com.example.devaudioreccordings.Routes
 import com.example.devaudioreccordings.services.MediaCaptureService
 import com.example.devaudioreccordings.user
 import com.example.devaudioreccordings.viewModals.AppViewModel
+import androidx.activity.compose.rememberLauncherForActivityResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -101,6 +103,13 @@ fun ExpandableFAB(
     navController: NavController
 ) {
     val context = LocalContext.current
+    val micPermissionLauncher = rememberLauncherForActivityResult(
+        contract = androidx.activity.result.contract.ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            navController.navigate(Routes.AICall.name)
+        }
+    }
     var expanded by remember { mutableStateOf(false) }
     var isServiceRunning by remember { mutableStateOf(0) }
     val materialTheme = MaterialTheme.colorScheme
@@ -198,6 +207,27 @@ fun ExpandableFAB(
             content = {
                 FloatingClipboardContent()
 
+            }
+        ),
+        FabOption(
+            icon = Icons.Default.Call,
+            label = "Talk to AI",
+            color = Color(0xFF1A6B8A),
+            actionToExecute = {
+                appViewModel.isNewTextCreated.value = false
+                expanded = false
+                val permissionStatus = androidx.core.content.ContextCompat.checkSelfPermission(
+                    context,
+                    android.Manifest.permission.RECORD_AUDIO
+                )
+                if (permissionStatus == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                    navController.navigate(Routes.AICall.name)
+                } else {
+                    micPermissionLauncher.launch(android.Manifest.permission.RECORD_AUDIO)
+                }
+            },
+            content = {
+                TalkToAIContent()
             }
         )
     )
@@ -713,6 +743,57 @@ fun CreateTextContent() {
     }
 }
 
+
+@Composable
+fun TalkToAIContent() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(max = 200.dp)
+            .verticalScroll(rememberScrollState(0))
+            .padding(12.dp),
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
+        )
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector = Icons.Default.Call,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(20.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Column {
+                    Text(
+                        text = "Talk to AI",
+                        style = MaterialTheme.typography.titleMedium.copy(
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                    Text(
+                        text = "Live voice conversation with AI",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                    )
+                }
+            }
+            Text(
+                text = "Start a real-time voice call with an AI assistant. Ask questions, brainstorm ideas, or just have a conversation. Optionally save the transcript as a note.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                fontSize = 11.sp,
+                lineHeight = 14.sp
+            )
+        }
+    }
+}
 
     @Composable
     fun FloatingClipboardContent() {

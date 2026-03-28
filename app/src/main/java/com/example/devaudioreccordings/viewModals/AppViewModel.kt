@@ -253,6 +253,22 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         return getLatestCreatedId()
     }
 
+    suspend fun addInitialTextData(header: String, text: String): Int {
+        dao.instertAudioText(
+            AudioTextDbData(
+                text = text,
+                audioFileName = null,
+                imageTimestampList = null,
+                header = header,
+                subHeader = null,
+                flowType = FlowType.AddText,
+                isApiCallRequired = false,
+                imageCollection = null
+            )
+        )
+        return getLatestCreatedId()
+    }
+
     suspend fun getLatestCreatedId(): Int {
         val totalIdCount = dao.getLatestCreatedId()
         return totalIdCount

@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e:*)",
+      "Bash(cd \"C:/Users/vishn/AndroidStudioProjects/DevAudioReccordings\" && ./gradlew :app:assembleDebug 2>&1)",
+      "Bash(./gradlew :app:test --tests \"com.example.devaudioreccordings.GeminiLiveClientTest\" 2>&1 | tail -20)",
+      "Bash(./gradlew :app:testDebugUnitTest --tests \"com.example.devaudioreccordings.GeminiLiveClientTest\" 2>&1 | tail -25)",
+      "Bash(./gradlew :app:testDebugUnitTest --tests \"com.example.devaudioreccordings.GeminiLiveClientTest\" 2>&1 | tail -30)",
+      "Bash(find /c/Users/vishn/AndroidStudioProjects/DevAudioReccordings/app/build/reports/tests -name \"*.xml\" | xargs grep -l \"GeminiLiveClientTest\" 2>/dev/null | head -3)",
+      "Bash(find /c/Users/vishn/AndroidStudioProjects/DevAudioReccordings/app/build/test-results -name \"*.xml\" 2>/dev/null | xargs grep -l \"GeminiLiveClient\" 2>/dev/null)",
+      "Bash(cd \"C:\\\\Users\\\\vishn\\\\AndroidStudioProjects\\\\DevAudioReccordings\" && ./gradlew :app:test --tests \"com.example.devaudioreccordings.GeminiLiveClientTest\" 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\vishn\\\\AndroidStudioProjects\\\\DevAudioReccordings\" && ./gradlew :app:testDebugUnitTest 2>&1)",
+      "Bash(./gradlew :app:test --tests \"com.example.devaudioreccordings.AICallViewModelTest\" 2>&1 | tail -30)",
+      "Bash(./gradlew :app:testDebugUnitTest --tests \"com.example.devaudioreccordings.AICallViewModelTest\" 2>&1 | tail -30)",
+      "Bash(./gradlew :app:generateDebugBuildConfig 2>&1 | tail -20)",
+      "Bash(./gradlew :app:compileDebugKotlin 2>&1 | grep -E \"\\(error:|e:\\)\" | head -20)",
+      "Bash(./gradlew :app:assembleDebug 2>&1 | tail -20)",
+      "Bash(./gradlew :app:testDebugUnitTest --tests \"com.example.devaudioreccordings.GeminiLiveClientTest\" 2>&1 | tail -10)",
+      "Bash(cd \"C:\\\\Users\\\\vishn\\\\AndroidStudioProjects\\\\DevAudioReccordings\" && ./gradlew :app:test --tests \"com.example.devaudioreccordings.AICallViewModelTest\" 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\vishn\\\\AndroidStudioProjects\\\\DevAudioReccordings\" && ./gradlew :app:assembleDebug 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\vishn\\\\AndroidStudioProjects\\\\DevAudioReccordings\" && ./gradlew :app:test 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\vishn\\\\AndroidStudioProjects\\\\DevAudioReccordings\" && ./gradlew :app:assembleDebug 2>&1 | tail -5)",
+      "Bash(cd \"C:\\\\Users\\\\vishn\\\\AndroidStudioProjects\\\\DevAudioReccordings\" && ./gradlew :app:assembleDebug 2>&1 | tail -3)"
+    ]
+  }
+}
